@@ -15,6 +15,7 @@ import com.concepts.android.ridecellmaptest.ui.map.MapActivity;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
 
         setupDaggerComponent();
+
+        ButterKnife.bind(this);
+
         mainPresenter.addView(this);
     }
 
@@ -52,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         // TODO: 3/13/2017 Use the Google Places
         Coord origin = new Coord(editTextOrigin.getText().toString().split(",")[0],
                 editTextOrigin.getText().toString().split(",")[1]);
-        Coord destination = new Coord(editTextOrigin.getText().toString().split(",")[0],
-                editTextOrigin.getText().toString().split(",")[1]);
+        Coord destination = new Coord(editTextDestination.getText().toString().split(",")[0],
+                editTextDestination.getText().toString().split(",")[1]);
 
         String s = editTextSpeed.getText().toString();
 
