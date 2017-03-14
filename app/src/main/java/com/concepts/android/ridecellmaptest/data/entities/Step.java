@@ -1,5 +1,5 @@
 
-package com.concepts.android.ridecellmaptest.data;
+package com.concepts.android.ridecellmaptest.data.entities;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

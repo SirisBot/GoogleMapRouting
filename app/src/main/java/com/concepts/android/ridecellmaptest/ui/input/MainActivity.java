@@ -3,13 +3,12 @@ package com.concepts.android.ridecellmaptest.ui.input;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.test.mock.MockApplication;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.concepts.android.ridecellmaptest.App;
 import com.concepts.android.ridecellmaptest.R;
-import com.concepts.android.ridecellmaptest.data.Coord;
+import com.concepts.android.ridecellmaptest.data.entities.Coord;
 import com.concepts.android.ridecellmaptest.ui.map.MapActivity;
 
 import javax.inject.Inject;

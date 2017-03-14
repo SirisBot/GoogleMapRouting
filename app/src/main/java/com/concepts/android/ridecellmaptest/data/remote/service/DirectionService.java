@@ -1,6 +1,6 @@
-package com.concepts.android.ridecellmaptest.util.service;
+package com.concepts.android.ridecellmaptest.data.remote.service;
 
-import com.concepts.android.ridecellmaptest.data.Result;
+import com.concepts.android.ridecellmaptest.data.entities.Result;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;

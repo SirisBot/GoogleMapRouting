@@ -10,11 +10,10 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.concepts.android.ridecellmaptest.R;
-import com.concepts.android.ridecellmaptest.data.Coord;
+import com.concepts.android.ridecellmaptest.data.entities.Coord;
 import com.concepts.android.ridecellmaptest.di.DaggerMapComponent;
 import com.concepts.android.ridecellmaptest.di.MapModule;
 import com.concepts.android.ridecellmaptest.ui.input.MainActivity;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,12 +22,9 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import javax.inject.Inject;
-import javax.xml.transform.stream.StreamResult;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback,MapContract.View {
 
@@ -65,11 +61,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // TODO: 3/13/2017 Update vehicle position coordinates as thread loops
         handler = new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                LatLng position = msg.getData().getParcelable("LATLNG");
+                LatLng position = msg.getData().getParcelable("COORDINATE");
                 updateLocation(position);
             }
         };
@@ -98,7 +95,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         mMap.addMarker(new MarkerOptions().position(originLatLng).title("Origin"));
         mMap.addMarker(new MarkerOptions().position(destinationLatLng).title("Destination"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(originLatLng, 10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(originLatLng, 15));
         mapPresenter.getDirections(originLatLng, destinationLatLng, speed);
     }
 
@@ -112,6 +109,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         polylineOptions.add(latlng);
     }
 
+    // TODO: 3/13/2017 Draw route retrieved from API in blue
     @Override
     public void drawRoute() {
         polylineOptions.color(Color.BLUE);
@@ -120,15 +118,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         mapPresenter.updateCoordinates(polylineOptions.getPoints(), handler, String.valueOf(speed));
     }
 
+    // TODO: 3/13/2017 Place object on map representing vehicle
     public void updateLocation(LatLng latLng) {
         if(circle != null){
             circle.remove();
         }
         circleOptions.center(latLng);
         circleOptions.fillColor(Color.GREEN);
-        circleOptions.radius(10);
+        circleOptions.radius(50);
         circleOptions.strokeColor(Color.GREEN);
         circle = mMap.addCircle(circleOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
     }
 
     @Override

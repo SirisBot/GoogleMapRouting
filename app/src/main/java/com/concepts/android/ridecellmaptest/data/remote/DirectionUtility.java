@@ -1,8 +1,6 @@
-package com.concepts.android.ridecellmaptest.util;
+package com.concepts.android.ridecellmaptest.data.remote;
 
-import android.content.Context;
-
-import com.concepts.android.ridecellmaptest.util.service.DirectionService;
+import com.concepts.android.ridecellmaptest.data.remote.service.DirectionService;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;

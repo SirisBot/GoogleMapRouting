@@ -1,10 +1,7 @@
 package com.concepts.android.ridecellmaptest.di;
 
-import android.content.Context;
-
 import com.concepts.android.ridecellmaptest.ui.map.MapPresenter;
-import com.concepts.android.ridecellmaptest.util.DirectionUtility;
-import com.concepts.android.ridecellmaptest.util.service.DirectionService;
+import com.concepts.android.ridecellmaptest.data.remote.DirectionUtility;
 
 import dagger.Module;
 import dagger.Provides;

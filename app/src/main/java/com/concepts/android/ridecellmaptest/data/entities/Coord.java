@@ -1,4 +1,4 @@
-package com.concepts.android.ridecellmaptest.data;
+package com.concepts.android.ridecellmaptest.data.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,8 +12,12 @@ public class Coord implements Parcelable {
     private Double longitude;
 
     public Coord(String latitude, String longitude) {
-        this.latitude = Double.valueOf(latitude);
-        this.longitude = Double.valueOf(longitude);
+        if (latitude.equals(""))
+            this.latitude = null;
+        else this.latitude = Double.valueOf(latitude);
+        if (longitude.equals(""))
+            this.latitude = null;
+        else this.longitude = Double.valueOf(longitude);
     }
 
     public Double getLatitude() {

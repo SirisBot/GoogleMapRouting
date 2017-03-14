@@ -31,6 +31,7 @@ public class MovementThread extends Thread {
 
     @Override
     public void run() {
+        // TODO: 3/13/2017 Pass vehicle position to map in loop according to speed specified
         float speed = Float.parseFloat(this.speed);
         for (LatLng latLng : latLngList) {
             if(exit) break;
@@ -41,7 +42,7 @@ public class MovementThread extends Thread {
                 e.printStackTrace();
             }
             Bundle b = new Bundle();
-            b.putParcelable("LATLNG", latLng);
+            b.putParcelable("COORDINATE", latLng);
             message.setData(b);
             handler.sendMessage(message);
         }

@@ -2,7 +2,6 @@ package com.concepts.android.ridecellmaptest.ui.map;
 
 import com.concepts.android.ridecellmaptest.BasePresenter;
 import com.concepts.android.ridecellmaptest.BaseView;
-import com.concepts.android.ridecellmaptest.data.Coord;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;

@@ -1,12 +1,12 @@
 package com.concepts.android.ridecellmaptest.ui.map;
 
-import com.concepts.android.ridecellmaptest.data.Leg;
-import com.concepts.android.ridecellmaptest.data.Result;
-import com.concepts.android.ridecellmaptest.data.Route;
-import com.concepts.android.ridecellmaptest.data.Step;
+import com.concepts.android.ridecellmaptest.data.entities.Leg;
+import com.concepts.android.ridecellmaptest.data.entities.Result;
+import com.concepts.android.ridecellmaptest.data.entities.Route;
+import com.concepts.android.ridecellmaptest.data.entities.Step;
 import com.concepts.android.ridecellmaptest.di.DaggerMapComponent;
 import com.concepts.android.ridecellmaptest.di.MapModule;
-import com.concepts.android.ridecellmaptest.util.DirectionUtility;
+import com.concepts.android.ridecellmaptest.data.remote.DirectionUtility;
 import com.concepts.android.ridecellmaptest.util.helper.MovementThread;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.PolyUtil;
@@ -15,11 +15,8 @@ import java.util.List;
 import android.os.Handler;
 
 import javax.inject.Inject;
-import javax.xml.transform.stream.StreamResult;
 
-import rx.Observable;
 import rx.Observer;
-import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -74,8 +71,8 @@ public class MapPresenter implements MapContract.Presenter {
 
             @Override
             public void onNext(Result result) {
+                // TODO: 3/13/2017 Loop through route steps if routes > 0
                 List<Route> routes = result.getRoutes();
-                if (routes.size() > 0) {
                     if(routes.size() > 0){
                         List<Leg> legs = routes.get(0).getLegs();
                         if(legs.size() > 0) {
@@ -83,15 +80,17 @@ public class MapPresenter implements MapContract.Presenter {
                             for (Step step : steps) {
                                 List<LatLng> latLngs = PolyUtil.decode(step.getPolyline().getPoints());
                                 for(LatLng latLng : latLngs)
+                                    // TODO: 3/13/2017 Add line for each step in route
                                     view.addStep(latLng);
                             }
                         }
+                        // TODO: 3/13/2017 Draw final route composed of each step
                         view.drawRoute();
                     }
-                }
             }
         };
 
+        // TODO: 3/13/2017 Subscribe to observable async call
         subscription = directionUtility.getService().getDirections(origin, destination, KEY)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -100,6 +99,7 @@ public class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void updateCoordinates(List<LatLng> latLngList, Handler handler, String speed) {
+        // TODO: 3/13/2017 Start thread to update position on map
         movementThread = new MovementThread(latLngList, handler, speed);
         movementThread.start();
     }

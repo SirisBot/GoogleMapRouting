@@ -2,7 +2,7 @@ package com.concepts.android.ridecellmaptest.ui.input;
 
 import com.concepts.android.ridecellmaptest.BasePresenter;
 import com.concepts.android.ridecellmaptest.BaseView;
-import com.concepts.android.ridecellmaptest.data.Coord;
+import com.concepts.android.ridecellmaptest.data.entities.Coord;
 
 /**
  * Created by Siris on 3/13/2017.
